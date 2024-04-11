@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400&display=swap');
+
+
+/* This was created almost last minute due to the rubric coming out 2 days before the due date, so this is not my best work. But this stylesheet is given to any mobile device that opens the webpage. */
+
+body {
+  background-color: #363940;
+}
+
+.footer {
+    width: 100%;
+    background-color: #454545;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  text-align: center;
+    border-bottom: 5px solid #6b6b6b;
+    padding-bottom:5px;
+  padding-top: 15px;
+  z-index: 9997;
+}
+
+h1,h2,h3,h4,h5,h6,p,a,li,span,button,div,input,textarea,summary,details,footer,header,main,strong {
+  color: white;
+}
+
+a {
+  color: #8181c5
+}
+
+.weatherstuff {
+  padding: 12px;
+  color:white;
+  position: fixed;
+  right: 0;
+  top:0;
+  text-align: right;
+  z-index: 9998;
+}
+
+.weatherstuff d {
+  display: none;
+}
+
+.postholder {
+  background-color: #353a41;
+  border-radius: 8px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 12px;
+  padding-left: 16px;
+  text-align: left;
+  color: white;
+  font-weight: 0;
+  margin-top: 40px;
+  margin-bottom: 25px;
+
+}
+
+.postholder h3 {
+  padding:0;
+  margin:0;
+}
+
+.postholder img {
+  height: 150px;
+  width: auto;
+  border-radius: 8px;
+}
+
+.pfp {
+  vertical-align: middle;
+}
+
+.postholder video {
+  height: 300px;
+  width: auto;
+  border-radius: 8px;
+}
+
+.logo {
+  position: fixed;
+  top:0;
+  left:0;
+  padding-left: 40px;
+}
+
+.users {
+  position: fixed;
+  top:15%;
+  right:15%;
+  width: 300px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px
+}
+
+.buttons {
+  text-align: center;
+}
+
+.side {
+  position: fixed;
+  top:14%;
+  left:1%;
+  padding: 10px;
+  border-radius: 10px;
+  display: none;
+}
+
+.title {
+  position: fixed;
+  top: 1%;
+  left: 3%;
+  display: none;
+
+}
+
+.posts {
+  text-align: center;
+  background-color:#1b1c1d;
+  width: 100%;
+  padding-top: 40px;
+  padding-bottom: 140px;
+  border-radius: 20px;
+}
+
+.new {
+  text-align: left;
+  background-color:#1b1c1d;
+  width: 1080px;
+  padding-left: 40px;
+  padding-top: 20px;
+  padding-bottom: 140px;
+  border-radius: 20px;
+}
+
+#top {
+  display: block;
+}
+
+.side2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 25;
+}
+
+.buttons {
+  font-size: 45px
+}

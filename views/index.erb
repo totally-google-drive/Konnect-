@@ -1,0 +1,248 @@
+<!--# This page has a lack of comments due to it having too much to explain, although it is all self explanitory and organized. But it does have some. -->
+
+
+<!DOCTYPE html>
+  <html>
+  <head>
+    <title>Konnect! - <%= page.capitalize %> </title>
+    <link rel="stylesheet" type="text/css" href="d.css?v=1"/>
+    <link rel="icon" type="icon" href="res/icon.png"/>
+
+  <script>
+  // # this simply checks if the client is using a mobile device.
+  function isMobileDevice() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
+  // # this sends the mobile css to the mobile devices, and the normal css to desktop devices.
+    if (isMobileDevice()) {
+      var cssLink = document.createElement("link");
+      var x = document.getElementById('top');
+      var y = document.getElementById('title');
+      var z = document.getElementById('thing');
+      cssLink.href = "stylemobile.css";
+      cssLink.rel = "stylesheet";
+      cssLink.type = "text/css"; 
+      document.head.appendChild(cssLink);
+      x.style.display = "block";
+      y.style.display = "none";
+      z.style.display = "none";
+    } else {
+      var cssLink = document.createElement("link");
+      cssLink.href = "style.css?ver=1";
+      cssLink.rel = "stylesheet";
+      cssLink.type = "text/css"; 
+      document.head.appendChild(cssLink);
+    }
+  </script>
+  </head>
+  <body onload="load();">
+    <img src="/res/konnect.png" class="title" style="filter: invert(100) drop-shadow(15px 10px 4px rgba(0 0 0)); height: 120px; width: auto; " onclick="window.open('/home', '_self')" id="title">
+    <div class="weatherstuff">
+      <strong id="temperature" style="font-size: 24px"></strong>
+      <br>
+      <d id="description"></d>
+    </div>
+
+
+
+
+
+<!-- # This is a custom div that only shows itself on the mobile version -->
+    <div class="footer">
+        <div id="top">
+        <img src="res/konnect.png" style="filter: invert(100); height: 250px; width: auto; ">
+        <div class="side2">
+            <button onclick="window.open('/polls', '_self');" title="Vote on these community run polls!">Polls</button>
+              <br>
+              <button onclick="window.open('/opinions', '_self');" title="Agree or disagree upon opinions!">Opinions</button>
+              <br>
+              <button onclick="window.open('/news', '_self');" title="Official news from the district!">News</button>
+            </div>
+        </div>
+      <button onclick="window.open('/profile', '_self');" title="Profile" class="buttons">Profile</button>
+      <button style="padding-left: 15px; padding-right: 15px;" onclick="window.open('/new', '_self');" title="New Post" class="buttons">+</button>
+      <button onclick="window.open('/home', '_self');" title="Home" class="buttons">Home</button>
+      <br>
+      <a href="/about">HyperDyne Publishing</a>
+    </div>
+
+        
+    <!--Scripts-->
+    <script src="js/weather.js?v=1"></script>
+    <!--Scripts-->
+
+
+    <!-- # This checks what subpage the user is on. such as /home or /profile, and then it send the correct html to the client. -->
+  <% if page == 'home' %>
+    <div>
+        <div class="posts">
+          <% # Find all TXT files in the current directory %>
+          <% txt_files = Dir.glob("postsx/*.txt") %>
+
+          <% # Iterate through each TXT file %>
+          <% txt_files.each do |file| %>
+            <% # Read the first line to get the username %>
+            <% username = File.open(file, "r") { |f| f.readline.chomp } %>
+
+            <div class="postholder">
+              <h2><%= File.basename(file, '.txt') %></h2>
+              <a style="display: inline; vertical-align: middle;">@<%= username %></a>
+              <p>
+                <% # Read the content of the file except the first line %>
+                <% content = File.open(file, "r") { |f| f.readlines[1..-1].join } %>
+                <%= content %>
+              </p>
+            </div>
+          <% end %>
+
+
+
+        
+
+    </div>
+  <% elsif page == 'polls' %>
+    <div class="posts">
+            <h1>Polls</h1>
+              <div class="postholder">   
+                <a style="display: inline; vertical-align: middle;"><img src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" class="pfp" style="width: 30px; height: auto; border-radius: 50%;"> @pollperson145</a>
+                <h2>Dogs, or Cats?</h2>
+                    <div id="poll1">
+                <button onclick="load1();">dogs</button>
+                  <b id="num1">
+                    <%= File.read('poll.txt').scan(/1/).size %>
+                    </b>
+                    <br>
+                    <button onclick="load2();">cats</button>
+                    <b  id="num2">
+                    <%= File.read('poll.txt').scan(/2/).size %>
+                    </b>
+              </div>
+            </div>
+          </div>
+    </div>
+
+  <% elsif page == 'opinions' %>
+  <div class="posts">
+        <h1>Opinions</h1>
+        <div class="postholder">   
+          <a style="display: inline; vertical-align: middle;"><img src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" class="pfp" style="width: 30px; height: auto; border-radius: 50%;"> @opinionman28</a>
+          <h2>I think the school lunch is terrible</h2>
+          <p>they should invest in an olive garden! That would be pretty cool.</p>
+        </div>
+              <div class="postholder">   
+                <a style="display: inline; vertical-align: middle;"><img src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" class="pfp" style="width: 30px; height: auto; border-radius: 50%;"> @opinionman53</a>
+                <h2>I do not enjoy waking up so early for school</h2>
+                <p>I think the district should consider a later start time at the cost of a later end time, cause then students will get more sleep at night.</p>
+              </div>
+            </div>
+        </div>
+
+
+
+
+            <% elsif page == 'news' %>
+
+            <div class="posts">
+            <h1>News</h1>
+            <div class="postholder">
+                <a>Dec 6th, 2023</a>
+                <h2>Updated Lunch Menu!</h2>
+                <p>Due to student feedback from this website, we are adding an olive garden to every school in the district!</p>
+            </div>
+                <div class="postholder">
+                    <a>Sep 1st, 2023</a>
+                    <h2>Welcome back students!</h2>
+                    <p>2023 will be the best year, duhh. This school year, we started another school year!</p>
+                </div>
+            
+            </div>
+
+
+
+
+<!-- # This is a custom div made for the section to post something. It does not currently do anything, as it is not connected to a db, so this is just a form. -->
+          <%elsif page == 'new' %>
+          <div class="new">
+              <h1>New Post</h1>
+                <form>
+                <h3>Username</h3>
+                <input id="uname">@example
+                <h3>Title</h3>
+                <input id="titlepost">
+                <h3>Body</h3>
+                <textarea style="width: 600px" id="input"></textarea>
+                <br>
+                <input type="file" id="myFile" name="filename" disabled>
+                <br>
+                <br>
+                <button onclick="e()">Post</button>
+                
+                
+                </form>
+              </div>
+
+
+
+                  <script>
+                    function e() {
+                      var w = document.getElementById('uname').value;
+                      var x = document.getElementById('input').value;
+                      var y = document.getElementById('titlepost').value;
+                      var z =  y + "&-&-&" + w + "BIGSPACERINCORPERATED" + x;
+
+                      fetch(`/post/${z}`, {
+                        method: 'POST'
+                      })
+
+                      window.open('/','_self')
+                    }
+
+                  </script>
+
+
+              <% elsif page == 'profile' %>
+
+              <div class="profile">
+              <div class="posts" style="text-align: left; padding-left: 30px;">
+                  <img src="res/user.jpg" style="vertical-align: top; margin-right: 12px;">
+                  <h1 style="display: inline-block; margin: 0;">User</h1>
+                  <!-- # This uses the school login username. -->
+                  <a>@abc123456</a>
+                  <p><strong>About: </strong>I enjoy coding in my free time, and my favorite class has to be math.</p>
+                  <p><strong>School:</strong> East HS</p>
+                  </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <% else %>
+   <% redirect '/home' %>
+   
+  <% end %>
+  <script src="js/post.js"></script>
+</body>
+</html>
